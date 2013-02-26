@@ -1,16 +1,28 @@
 #!/usr/bin/env python
+# by: John Stultz <john.stultz@linaro.org>
+# Copyright 2013 Linaro Limited
+#
+# Licensed under the GPLv2
+#
+# This tool requires matplotlib 1.0 or greater to be installed!
 
 import time
 import string
 import sys
 from pylab import *
 from datetime import *
-from matplotlib import *
+from distutils.version import StrictVersion
+
+#make sure we've got a recent version fo matplotlib
+if (StrictVersion(matplotlib.__version__) < StrictVersion('1.0')):
+	print "Error: This tool requires matplotlib 1.0 or greater"
+	sys.exit(-1)
+
 
 
 #helpers for tweaking chart size/fonts
-xbigchart	= {"dpi":600, "dotsize":2, "yfont":2, "grid_axis":"x", "othercut":7}
-bigchart 	= {"dpi":300, "dotsize":4, "yfont":5, "grid_axis":"x", "othercut":5}
+xbigchart	= {"dpi":500, "dotsize":2, "yfont":2, "grid_axis":"x", "othercut":7}
+bigchart 	= {"dpi":200, "dotsize":4, "yfont":5, "grid_axis":"x", "othercut":5}
 normchart	= {"dpi":200, "dotsize":6, "yfont":8, "grid_axis":"both", "othercut":2}
 
 chart_opts = normchart
