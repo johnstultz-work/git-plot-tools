@@ -4,8 +4,9 @@ git-plot-tools
 Here's just a simple tool for plotting git commits against time.
 
 To use:
-	git log --pretty="%at, %s" [start hash]..[end hash] > output
-	./topic-time-plot.py output
+
+	$ git log --pretty="%at, %s" [start hash]..[end hash] > output
+	$ ./topic-time-plot.py output
 
 This will generate a file called: commit-chart.png
 Which will show the commits broken up by patch topic by date.
