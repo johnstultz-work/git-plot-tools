@@ -48,6 +48,10 @@ for line in datafile.read().split("\n"):
 
 	# try to cleanup the patch_type
 	patch_type = patch_type.strip()
+
+	if "[PATCH]" in patch_type[0:8].upper(): #special case [PATCH] intro
+		patch_type = patch_type[8:]
+
 	patch_type = patch_type.split(":")[0]
 	patch_type = patch_type.split(" ")[0]
 	patch_type = filter(str.isalnum, patch_type)
