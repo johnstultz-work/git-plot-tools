@@ -74,9 +74,10 @@ if (len(biglist.keys()) > 300):
 	chart_opts = xbigchart
 
 
-# group any list smaller then N items into "other"
+#sort dates and group any list smaller then N items into "other"
 biglist["other"] = []
 for key in biglist.keys():
+	biglist[key] = sorted(biglist[key])
 	tmplist = []
 	if (len(biglist[key]) < chart_opts["othercut"]) :
 		tmplist = biglist[key]
@@ -87,9 +88,10 @@ for key in biglist.keys():
 ticks=[]
 colors = ['.r','.g','.b','.c','.m','.y']
 
+sorted_keylist = sorted(biglist, key=lambda x: (biglist[x][0]), reverse=True)
 #plot dots
 count = 1; #start with 1 to avoid dots at the bottom edge
-for key in biglist.keys():
+for key in sorted_keylist:
 	points = [count] * len(biglist[key])
 	plot_date(biglist[key], points, colors[count%len(colors)],
 					markersize=chart_opts["dotsize"])
@@ -103,7 +105,7 @@ ticks.append(count)
 ax = subplot(111)
 ax.set_ylim([0,count]) 
 ax.set_yticks(ticks)
-ax.set_yticklabels(biglist.keys())
+ax.set_yticklabels(sorted_keylist)
 ax.yaxis.set_ticks_position('right')
 ax.tick_params(axis='y', which='major', labelsize=chart_opts["yfont"])
 formatter = DateFormatter('%m/%y')
