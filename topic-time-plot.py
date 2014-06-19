@@ -9,6 +9,8 @@
 import time
 import string
 import sys
+import matplotlib
+matplotlib.use('Agg')
 from pylab import *
 from datetime import *
 from distutils.version import StrictVersion
