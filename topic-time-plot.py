@@ -88,7 +88,7 @@ for key in biglist.keys():
 ticks=[]
 colors = ['.r','.g','.b','.c','.m','.y']
 
-sorted_keylist = sorted(biglist, key=lambda x: (biglist[x][0]), reverse=True)
+sorted_keylist = sorted(biglist, key=lambda x: (biglist[x][0]), reverse=False)
 #plot dots
 count = 1; #start with 1 to avoid dots at the bottom edge
 for key in sorted_keylist:
