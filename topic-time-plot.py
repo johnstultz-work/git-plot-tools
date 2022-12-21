@@ -17,7 +17,7 @@ from distutils.version import StrictVersion
 
 #make sure we've got a recent version fo matplotlib
 if (StrictVersion(matplotlib.__version__) < StrictVersion('1.0')):
-	print "Error: This tool requires matplotlib 1.0 or greater"
+	print("Error: This tool requires matplotlib 1.0 or greater")
 	sys.exit(-1)
 
 
@@ -31,9 +31,9 @@ chart_opts = normchart
 
 
 if len(sys.argv) < 2:
-	print "Usage: ", sys.argv[0], " <filename>"
-	print 'Where <filename> is the output file from a call to:'
-	print '	git log --pretty="%at, %s" <range>'
+	print ("Usage: ", sys.argv[0], " <filename>")
+	print ('Where <filename> is the output file from a call to:')
+	print ('	git log --pretty="%at, %s" <range>')
 	sys.exit(-1)
 
 
@@ -56,12 +56,12 @@ for line in datafile.read().split("\n"):
 
 	patch_type = patch_type.split(":")[0]
 	patch_type = patch_type.split(" ")[0]
-	patch_type = filter(str.isalnum, patch_type)
+#	patch_type = filter(str.isalnum, patch_type)
 	patch_type = patch_type.strip()
 	patch_type = patch_type.lower()
 
 	# add to biglist
-	if (biglist.has_key(patch_type)):
+	if (patch_type in biglist):
 		biglist[patch_type].append(date)
 	else:
 		biglist[patch_type] = [date]
@@ -76,7 +76,7 @@ if (len(biglist.keys()) > 300):
 
 #sort dates and group any list smaller then N items into "other"
 biglist["other"] = []
-for key in biglist.keys():
+for key in list(biglist):
 	biglist[key] = sorted(biglist[key])
 	tmplist = []
 	if (len(biglist[key]) < chart_opts["othercut"]) :
@@ -98,8 +98,8 @@ for key in sorted_keylist:
 	ticks.append(count)
 	count = count +1
 #add an empty list to avoid dots at the top edge
-plot_date([], [], colors[count%len(colors)], markersize=chart_opts["dotsize"])
-ticks.append(count)
+#plot_date([], [], colors[count%len(colors)], markersize=chart_opts["dotsize"])
+#ticks.append(count)
 
 #setup ticks/labels/fonts/etc
 ax = subplot(111)
